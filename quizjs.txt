@@ -1,0 +1,84 @@
+var questions =[{
+    "question" :"The World Largest desert is ? ?",
+    "option1" : "Thar",
+    "option2" : "Kalahari",
+    "option3" : "Sahara",
+    "option4" : "Sonoran",
+    "answer"  : "3"
+}, {
+    "question" :"Software which is used to do a particular task?" ,
+    "option1" : "Operating System",
+    "option2" : "Program",
+    "option3" : "Data",
+    "option4" : "software",
+    "answer"  : "2"
+    
+},{
+    "question" :"The rules of a language is known as" ,
+    "option1" : "Code",
+    "option2" : "Structure",
+    "option3" : "Procedure",
+    "option4" : "syntax",
+    "answer"  : "4"
+},{
+    "question" :"If a computer has more than one processor then it is known as" ,
+    "option1" : "Uniprocessor",
+    "option2" : "Multiprocessor",
+    "option3" : "Multithreaded",
+    "option4" : "Multiprogrammming",
+    "answer"  : "2"
+},{
+    "question" :"Full form of URL is?" ,
+    "option1" : "Uniform Resource Locator",
+    "option2" : "Uniform Resource Link",
+    "option3" : "Uniform Registered Link",
+    "option4" : " Unified Resource Link",
+    "answer"  : "1"
+},
+];
+var currentquestion = 0;
+var score =0;
+var totquestions = questions.length;
+var container = document.getElementById('quizContainer');
+var questionEl= document.getElementById('question');
+var opt1 =document.getElementById('opt1');
+var opt2 =document.getElementById('opt2');
+var opt3 =document.getElementById('opt3');
+var opt4 =document.getElementById('opt4');
+var nextButton = document.getElementById('nextButton');
+var resultcon = document.getElementById('result');
+function loadQuestion(questionIndex)
+{
+    var q =questions[questionIndex];
+    questionEl.textContent=(questionIndex+1) +'.' +q.question;
+    opt1.textContent = q.option1;
+    opt2.textContent = q.option2;
+    opt3.textContent = q.option3;
+    opt4.textContent = q.option4;
+}
+function loadNextQuestion(){
+    var selectedopt = document.querySelector('input[type=radio]:checked');
+    if(!selectedopt)
+    {
+        alert('please select your answer!');
+        return;
+    }
+    var answer = selectedopt.value;
+    if(questions[currentquestion].answer==answer){
+        score+=1;
+    }
+    selectedopt.checked = false;
+    currentquestion++;
+    if(currentquestion==totquestions-1){
+        nextButton.textContent ='Finish';
+    }
+    if(currentquestion==totquestions)
+    {
+        container.style.display='none';
+        resultcon.style.display='';
+        resultcon.textContent ='Your Score :  ' +score+"/5";
+        return;
+    }
+    loadQuestion(currentquestion);
+
+}loadQuestion(currentquestion);
